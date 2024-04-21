@@ -1,0 +1,246 @@
+{
+	"info": {
+		"_postman_id": "0a90b310-d43c-49f4-96ea-66a01b3dc5a6",
+		"name": "thetestingstudent",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23141320"
+	},
+	"item": [
+		{
+			"name": "Get student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check length of the response",
+							"pm.test(\"Response has a specific length\", function () {",
+							"    pm.expect(pm.response.json()).to.have.lengthOf(100);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/api/studentsDetails",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"first_name\": \"sample string 2\",\r\n\"middle_name\": \"sample string 3\",\r\n\"last_name\": \"sample string 4\",\r\n\"date_of_birth\": \"sample string 5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/studentsDetails",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Specific Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"// Test for id, first name, middle name, last name, and date of birth field value validation\r",
+							"pm.test(\"Validating id, first name, middle name, last name, and date of birth field values\", function () {\r",
+							"    var responseData = pm.response.json().data;\r",
+							"\r",
+							"    pm.expect(responseData.id).to.be.a('number');\r",
+							"    pm.expect(responseData.first_name).to.be.a('string').and.to.not.be.empty;\r",
+							"    pm.expect(responseData.middle_name).to.be.a('string');\r",
+							"    pm.expect(responseData.last_name).to.be.a('string').and.to.not.be.empty;\r",
+							"   // pm.expect(responseData.date_of_birth).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/api/studentsDetails/10098835",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails",
+						"10098835"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Technical Skills",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"id\": 1,\r\n\"language\": [\r\n\"sample string 1\",\r\n\"sample string 2\"\r\n],\r\n\"yearexp\": \"sample string 2\",\r\n\"lastused\": \"sample string 3\",\r\n\"st_id\": \"id\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/technicalskills",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"technicalskills"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Student Address",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Status and message fields have valid values\", function () {\r",
+							"    var response = pm.response.json();\r",
+							"    pm.expect(response).to.have.property('status').that.is.a('string').and.not.empty;\r",
+							"    pm.expect(response).to.have.property('msg').that.is.a('string').and.not.empty;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Permanent_Address\": {\r\n        \"House_Number\": \"sample string 1\",\r\n        \"City\": \"sample string 2\",\r\n        \"State\": \"sample string 3\",\r\n        \"Country\": \"sample string 4\",\r\n        \"PhoneNumber\": [\r\n            {\r\n                \"Std_Code\": \"sample string 1\",\r\n                \"Home\": \"sample string 2\",\r\n                \"Mobile\": \"sample string 3\"\r\n            },\r\n            {\r\n                \"Std_Code\": \"sample string 1\",\r\n                \"Home\": \"sample string 2\",\r\n                \"Mobile\": \"sample string 3\"\r\n            }\r\n        ]\r\n    },\r\n    \"stId\": \"id\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/addresses",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"addresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FINAL STUDENT DETAILS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/FinalStudentDetails",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"FinalStudentDetails"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
